@@ -4,7 +4,7 @@ this repo is missing some large models, to fix you can install [https://pypi.org
 docker pull pupmaster/stout2api:latest
 docker run -p 8000:8000 pupmaster/stout_api:latest
 
-Documentation:
+Once running, see documentation:
 http://localhost:8000/docs
 
 Example: 
@@ -101,7 +101,8 @@ Note: Within the STOUT files is the team’s inference rig, training, and evalua
 
 WSL: 25.10%, 635.81 MB | N/A |
 
-![Figure_1.png](attachment:07c59545-ab09-4345-85be-d7d630e0cf78:Figure_1.png)
+<img width="1344" height="670" alt="image" src="https://github.com/user-attachments/assets/5bae2c7b-3be3-468d-9df5-c618acca99c2" />
+
 
 ### Comparison Results
 
@@ -109,13 +110,15 @@ WSL: 25.10%, 635.81 MB | N/A |
     - Differences from Rajan et al. are likely due to minor tokenization and RDKit preprocessing mismatches (e.g. RDKit versioning, canonicalization).
     - High BLEU and roundtrip Tanimoto scores suggest the model captures chemical structure well but fails on formatting-sensitive exact-match metrics. From a cheminformatics standpoint, the model succeeds in preserving molecular identity which is more critical than token-level match in many real-world applications.
     - Failures are concentrated in non-chemical tokens (punctuation, formatting), not core structural terms, pointing to token-level noise, not model underperformance.
-        - If B-12 wants a fix, train an AlphaEvolve-style RL or manually reverse engineer Rajan’s tokenization code.
+        - If [my company] wants a fix, train an AlphaEvolve-style RL or manually reverse engineer Rajan’s tokenization code.
 
-![image.png](attachment:c6b15514-a0d6-44f8-9c4d-874b788ca4e6:image.png)
+<img width="1312" height="417" alt="image" src="https://github.com/user-attachments/assets/53b151a2-8aa4-4b5f-9c33-84ca73cd9fa2" />
+
 
 ![image.png](attachment:315b2028-ec0d-4c5d-b4b5-2691934d72d6:image.png)
 
-![Only 3% of failures are true roundtrip errors (SMILES→IUPAC→SMILES yields a different molecule), indicating the model preserves chemical structure even when formatting fails.](attachment:f9e53f22-ea15-4495-ae50-447568ae3806:image.png)
+<img width="566" height="536" alt="image" src="https://github.com/user-attachments/assets/95ad9d54-3a00-40a3-8b1e-d276f0a22b49" />
+
 
 Only 3% of failures are true roundtrip errors (SMILES→IUPAC→SMILES yields a different molecule), indicating the model preserves chemical structure even when formatting fails.
 
