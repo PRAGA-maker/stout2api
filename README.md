@@ -1,7 +1,7 @@
 this is a FastAPI for Stout2 [https://jcheminf.biomedcentral.com/counter/pdf/10.1186/s13321-024-00941-x.pdf] which translates IUPAC -> SMILES, vice versa
 
 this repo is missing some large models, to fix you can install [https://pypi.org/project/STOUT-pypi/], find the models folder and replace the models folder here, or the easiest option:
-docker pull pupmaster/stout2api:latest
+docker pull pupmaster/stout_api:v3
 docker run -p 8000:8000 pupmaster/stout_api:latest
 
 Once running, see documentation:
