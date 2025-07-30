@@ -1,0 +1,44 @@
+FROM python:3.10-slim
+
+# Python environment setup
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app
+
+WORKDIR /app
+
+# Copy requirements early for better caching
+COPY api/requirements.txt .
+
+# Install Python dependencies
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Install Java + build tools + wget/unzip in one pass
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-17-jre-headless \
+    wget \
+    unzip \
+    make \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up Java path
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+# Copy source code
+COPY api/ ./api/
+COPY models/ ./models/
+COPY stout_pkg_files/ ./stout_pkg_files/
+
+# Expose API port and Ray dashboard port
+EXPOSE 8000 8265
+
+# Set Ray environment variables for container deployment
+ENV RAY_DISABLE_IMPORT_WARNING=1
+ENV RAY_DEDUP_LOGS=0
+
+# Final run command
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
